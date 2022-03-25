@@ -1,8 +1,18 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button, Offcanvas, OffcanvasHeader, OffcanvasBody} from 'reactstrap'
+import LoginButton from './login'
 
 export default class Navegacion extends Component {
+
+  state ={
+    verMenu : false
+  }
+  showMenuDespeglable =()=>{
+    this.setState({verMenu: !this.state.verMenu})
+    
+  }
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -11,7 +21,8 @@ export default class Navegacion extends Component {
             FREE-MECHANICS-ERP
           </Link>
 
-          <button
+          <Button onClick={this.showMenuDespeglable}
+          
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
@@ -21,31 +32,77 @@ export default class Navegacion extends Component {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-          </button>
+          </Button>
+          <Offcanvas 
+          className="navbar navbar-dark bg-dark"
+          isOpen ={this.state.verMenu} 
+          toggle={this.showMenuDespeglable}
+          
+          >
+            
+            <OffcanvasHeader toggle={this.showMenuDespeglable}>
+              Offcanvas
+            </OffcanvasHeader>
+            <OffcanvasBody >
+              <div className="navbar">
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item active ms-5">
+                    <Link className="nav-link" to="/">Incio</Link>
+                  </li>
+                  <li className="nav-item active ms-5">
+                    <Link className="nav-link" to="/proveedores">Proveedores</Link>
+                  </li>
+                  <li className="nav-item active ms-5">
+                    <Link className="nav-link" to="/clientes">Clientes</Link>
+                  </li>
+                  <li className="nav-item active ms-5">
+                    <Link className="nav-link" to="/articulos">Artículos</Link>
+                  </li>
+                  <li className="nav-item active ms-5">
+                    <Link className="nav-link" to="/configuracion">Configuración</Link>
+                  </li>
+                </ul>
+              </div>
+          </OffcanvasBody>
+          </Offcanvas>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item active">
+              <li className="nav-item active ms-5">
                 <Link className="nav-link" aria-current="page" to="/">
                   Inicio
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/clientes">
+              <li className="nav-item ms-5">
+                <Link className="nav-link" aria-current="page" to="/clientes">
                   Clientes
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/proveedores">
+              <li className="nav-item ms-5">
+                <Link className="nav-link" aria-current="page" to="/proveedores">
                   Proveedores
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link disabled" to ="/">
-                  Login
+              <li className="nav-item ms-5">
+                <Link className="nav-link" aria-current="page" to="/articulos">
+                  Artículos
+                </Link>
+              </li>
+              <li className="nav-item ms-5">
+                <Link className="nav-link" aria-current="page" to="/vehiculos">
+                  Vehículos
+                </Link>
+              </li>
+              <li className="nav-item ms-5">
+                <Link className="nav-link" aria-current="page" to="/configuracion">
+                  Configuración
                 </Link>
               </li>
             </ul>
+            
           </div>
+        </div>
+        <div className="float-end me-3">
+              <LoginButton/>
         </div>
       </nav>
     );

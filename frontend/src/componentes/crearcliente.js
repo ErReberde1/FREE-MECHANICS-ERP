@@ -10,42 +10,45 @@ export default class CrearCliente extends Component {
       email: "",
       direccion: "",
       cif: "",
+      provincia:"",
+      telefono:"",
       ciudad: "",
       pais: "",
-      cp:""
-
+      cp:"",
+      plantilla: "",
+      impuesto: ""
     }
     onChangeNombre = (e)=>{
       this.setState({
-      nombre : e.target.value})
+      nombre : e.target.value.toUpperCase()})
     }
     onChangeApellido = (e)=>{
       this.setState({
-      apellido : e.target.value})
+      apellido : e.target.value.toUpperCase()})
     }
     onChangeEmail = (e)=>{
       this.setState({
-      email : e.target.value})
+      email : e.target.value.toUpperCase()})
     }
     onChangeDireccion = (e)=>{
       this.setState({
-      direccion : e.target.value})
+      direccion : e.target.value.toUpperCase()})
     }
     onChangeCiudad = (e)=>{
       this.setState({
-      ciudad : e.target.value})
+      ciudad : e.target.value.toUpperCase()})
     }
     onChangePais = (e)=>{
       this.setState({
-      pais : e.target.value})
+      pais : e.target.value.toUpperCase()})
     }
     onChangeCp = (e)=>{
       this.setState({
-      cp : e.target.value})
+      cp : e.target.value.toUpperCase()})
     }
     onChangeCif = (e)=>{
       this.setState({
-      cif : e.target.value})
+      cif : e.target.value.toUpperCase()})
     }
 
     onSubmit = async e=>{
@@ -70,6 +73,10 @@ export default class CrearCliente extends Component {
         pais: "",
         cp: ""
       })
+      
+        
+         
+        
     }
   render() {
     return (
@@ -163,6 +170,8 @@ export default class CrearCliente extends Component {
           <FormGroup>
             <Label for="exampleZip">CP</Label>
             <Input id="exampleZip" 
+            length="5"
+            type="number"
             name="CP" 
             onChange={this.onChangeCp}
             value={this.state.cp}

@@ -5,18 +5,29 @@ import Navegacion from './componentes/navegacion';
 import ListaClientes from './componentes/listaclientes';
 import CrearCliente from './componentes/crearcliente';
 import Principal from './componentes/principal';
+import Configuracion from './componentes/configuracion'
+import CrearArticulo from './componentes/articulos/creararticulo'
+import Listaproveedores from './componentes/proveedores/listaproveedores'
+import Vehiculos from './componentes/vehiculos'
+import CrearProveedor from './componentes/proveedores/crearproveedor'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
   return (
     <Router>
+      
       <Navegacion/>
+      
       <Routes>
         <Route path="/" element={<Principal/>}/>
         <Route path="/clientes" element={<ListaClientes/>}/>
+        <Route path="/vehiculos" element={<Vehiculos/>}/>
+        <Route path="/articulos" element={<CrearArticulo/>}/>
+        <Route path="/configuracion" element={<Configuracion/>}/>
         <Route path="/crearcliente" element={<CrearCliente/>}/>
-        
+        <Route path="/proveedores" element={<Listaproveedores/>}/>
+        <Route path="/crearproveedor" element={<CrearProveedor/>}/>
       </Routes>
     </Router>
   );

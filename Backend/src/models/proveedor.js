@@ -1,6 +1,7 @@
-const {Schema, model} = require('mongoose');
+const {Schema, model} = require('mongoose')
 
-const clienteSchema = new Schema ({
+
+const proveedorSchema = new Schema({
     nombre: String,
     apellido: String,
     email: String,
@@ -13,9 +14,8 @@ const clienteSchema = new Schema ({
     cp: Number,
     plantilla: String,
     impuesto: String,
-}, {
+},{
     timestamps: true
-})
+});
 
-
-module.exports = model('cliente', clienteSchema)
+module.exports = model('proveedor', proveedorSchema)

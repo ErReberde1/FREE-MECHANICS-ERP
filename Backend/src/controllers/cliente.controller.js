@@ -8,7 +8,7 @@ clienteCtrl.getClientes = async (req,res)=>{
     res.json(arrayClientes)
 }
 clienteCtrl.postCliente = async (req,res)=>{
-    const {nombre, apellido,direccion, email, cif, ciudad, pais, cp} = req.body;
+    const {nombre, apellido,direccion, email, cif, ciudad, pais, cp, provincia, telefono, impuesto, plantilla} = req.body;
     const guardarCliente = new clienteModel({
         nombre: nombre,
         apellido: apellido,
@@ -16,8 +16,13 @@ clienteCtrl.postCliente = async (req,res)=>{
         direccion: direccion,
         cif: cif,
         ciudad: ciudad,
+        provincia: provincia,
+        telefono: telefono,
         pais: pais,
         cp: cp,
+        plantilla: plantilla,
+        impuesto: impuesto
+
     })
     res.json({message: 'cliente guardado'})
     await guardarCliente.save()
@@ -25,9 +30,41 @@ clienteCtrl.postCliente = async (req,res)=>{
 }
 
 
-clienteCtrl.putCliente = (req,res)=>res.json({message: 'Put request'})
-clienteCtrl.deleteCliente = (req,res)=>res.json({message: 'Delete request de un ID'})
-clienteCtrl.getCliente = (req,res)=> res.send({message: 'Get request'})
+clienteCtrl.putCliente = async (req,res)=>{
+    
+    const {nombre, apellido,direccion, email, cif, ciudad, pais, cp, provincia, telefono, impuesto, plantilla} = req.body;
+    await clienteModel.findByIdAndUpdate(req.params.id, {
+        nombre: nombre,
+        apellido: apellido,
+        email: email,
+        direccion: direccion,
+        cif: cif,
+        ciudad: ciudad,
+        provincia: provincia,
+        telefono: telefono,
+        pais: pais,
+        cp: cp,
+        plantilla: plantilla,
+        impuesto: impuesto
+    });
+
+    
+    
+}
+
+clienteCtrl.deleteCliente = async(req,res)=>{
+
+    await clienteModel.findByIdAndDelete(req.params.id)
+    
+}
+clienteCtrl.getCliente = async(req,res)=>{
+    
+    const arrayCliente = await clienteModel.findById(req.params.id)
+    
+    res.json(arrayCliente)
+
+    
+}
 
 
 module.exports = clienteCtrl;
