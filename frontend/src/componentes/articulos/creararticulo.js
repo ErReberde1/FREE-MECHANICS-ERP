@@ -65,6 +65,7 @@ export default class CrearArticulo extends Component {
   render() {
     return (
       <div>
+      
         <Form className="formulario ms-4" onSubmit={this.onSubmit}>
           <Row form>
             <Col md={6}>
