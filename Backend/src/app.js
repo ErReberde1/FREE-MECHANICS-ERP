@@ -23,7 +23,7 @@ app.use(express.json())
 app.use('/api/cliente', require('./routes/clientes')) // el enlace localhost:4000/users devuelve "users routes"
 app.use('/api/user', require('./routes/users'))
 app.use('/api/proveedor', require('./routes/proveedores'))
-app.use('api/articulo', require('./routes/articulos')) 
+app.use('/api/articulo', require('./routes/articulos')) 
 
 
 // ejecución de la función conexión al servidor.
