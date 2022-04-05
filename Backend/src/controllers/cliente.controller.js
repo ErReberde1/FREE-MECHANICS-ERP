@@ -4,9 +4,10 @@ const clienteModel = require('../models/cliente.js')
 
 clienteCtrl.getClientes = async (req,res)=>{
     const arrayClientes = await clienteModel.find()
-    
+
     res.json(arrayClientes)
 }
+
 clienteCtrl.postCliente = async (req,res)=>{
     const {nombre, apellido,direccion, email, cif, ciudad, pais, cp, provincia, telefono, impuesto, plantilla} = req.body;
     const guardarCliente = new clienteModel({

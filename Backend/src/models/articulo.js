@@ -1,11 +1,13 @@
 const {Schema, model} = require("mongoose")
 
 const articuloSchema = new Schema({
+    codigo: Number,
     nombre: String,
     precio: Number,
     impuesto: Number,
     tarifa: Number,
-    descripcion: String
+    descripcion: String,
+    fecha: Date
 },{
     timestamps: true
 }

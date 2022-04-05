@@ -10,6 +10,7 @@ import CrearArticulo from './componentes/articulos/creararticulo'
 import Listaproveedores from './componentes/proveedores/listaproveedores'
 import Vehiculos from './componentes/vehiculos'
 import CrearProveedor from './componentes/proveedores/crearproveedor'
+import ListaArticulos from './componentes/articulos/listaarticulos'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -23,11 +24,12 @@ function App() {
         <Route path="/" element={<Principal/>}/>
         <Route path="/clientes" element={<ListaClientes/>}/>
         <Route path="/vehiculos" element={<Vehiculos/>}/>
-        <Route path="/articulos" element={<CrearArticulo/>}/>
+        <Route path="/articulos" element={<ListaArticulos/>}/>
         <Route path="/configuracion" element={<Configuracion/>}/>
         <Route path="/crearcliente" element={<CrearCliente/>}/>
         <Route path="/proveedores" element={<Listaproveedores/>}/>
         <Route path="/crearproveedor" element={<CrearProveedor/>}/>
+        <Route path="/creararticulo" element={<CrearArticulo/>}/>
       </Routes>
     </Router>
   );

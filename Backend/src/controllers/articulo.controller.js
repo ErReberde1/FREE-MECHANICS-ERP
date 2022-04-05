@@ -1,4 +1,4 @@
-articuloCtrl ={};
+const articuloCtrl ={};
 const articuloModel = require('../models/articulo');
 
 articuloCtrl.getArticulos = async (req, res)=>{
@@ -8,9 +8,11 @@ articuloCtrl.getArticulos = async (req, res)=>{
 }
 
 articuloCtrl.postArticulo = async (req, res) =>{
-    const {nombre, precio, impuesto, tarifa, descripcion} = req.body
+    const {fecha, codigo, nombre, precio, impuesto, tarifa, descripcion} = req.body
 
-    const guardarArticulo = new ArticuloModel ({
+    const guardarArticulo = new articuloModel ({
+        fecha: fecha,
+        codigo: codigo,
         nombre: nombre,
         precio: precio,
         impuesto: impuesto,

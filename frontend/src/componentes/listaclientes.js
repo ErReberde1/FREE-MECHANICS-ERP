@@ -62,14 +62,12 @@ export default class ListaClientes extends Component {
     }
     componenteDidMount = async () =>{
         const res = await axios.get('http://localhost:4000/api/cliente');   
-        this.setState({ clientes: res.data })    
+        this.setState({ clientes: res.data })
     }
     showModalUpdate = async (id) =>{
         const res = await axios.get('http://localhost:4000/api/cliente/' + id);
-        this.setState({clienteUpdateId: res.data})
-        this.setState({showModalUpdate: !this.state.showModalUpdate})
-
-        
+        this.setState({clienteUpdateId: res.data});
+        this.setState({showModalUpdate: !this.state.showModalUpdate});
     }
     closeModalUpdate =()=>{
         this.setState({showModalUpdate: !this.state.showModalUpdate})
@@ -91,12 +89,10 @@ export default class ListaClientes extends Component {
         const search = this.state.clientes.filter(item =>{
             
             if(item.nombre.toString().toLowerCase().includes(this.state.busqueda)){
-                return item
-            } else{
-                return console.log("nada")
-            }
-            
-        })
+                return item;
+            };
+        }
+        )
         this.setState({clientes: search})
         
     }
@@ -104,6 +100,7 @@ export default class ListaClientes extends Component {
     searchElement =  (e)=>{
         e.persist()
         this.setState({busqueda: e.target.value})
+        console.log(e.target.value);
         this.filterElement()
     }
 
@@ -112,8 +109,8 @@ export default class ListaClientes extends Component {
 
         this.componenteDidMount()
     }
-    updateCliente = async(event,id) =>{
-        event.preventDefault()
+    updateCliente = async(e,id) =>{
+        e.preventDefault()
         await axios.put('http://localhost:4000/api/cliente/' + id, {
             nombre : this.state.nombre,
             apellido: this.state.apellido,
