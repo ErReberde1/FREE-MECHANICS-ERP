@@ -96,6 +96,7 @@ export default class CrearCliente extends Component {
               name="Name"
               placeholder="Nombre"
               type="Name"
+              required
               value={this.state.nombre}
             />
           </FormGroup>
@@ -109,6 +110,7 @@ export default class CrearCliente extends Component {
               placeholder="Apellido"
               type="Name"
               value={this.state.apellido}
+              required
             />
           </FormGroup>
         </Col>
@@ -121,6 +123,7 @@ export default class CrearCliente extends Component {
               placeholder="ejemplo@ejemplo.es"
               type="email"
               value={this.state.email}
+              required
             />
           </FormGroup>
         </Col>
@@ -133,6 +136,7 @@ export default class CrearCliente extends Component {
         placeholder="Av..." 
         onChange={this.onChangeDireccion}
         value={this.state.direccion}
+        required
         />
       </FormGroup>
       <FormGroup>
@@ -142,6 +146,7 @@ export default class CrearCliente extends Component {
         placeholder="CIF" 
         onChange={this.onChangeCif}
         value={this.state.cif}
+        required
         />
       </FormGroup>
       
@@ -153,6 +158,7 @@ export default class CrearCliente extends Component {
             name="Ciudad" 
             onChange={this.onChangeCiudad}
             value={this.state.ciudad}
+            required
             />
           </FormGroup>
         </Col>
@@ -163,6 +169,7 @@ export default class CrearCliente extends Component {
             name="Pais"
             onChange={this.onChangePais}
             value={this.state.pais}
+            required
             />
           </FormGroup>
         </Col>
@@ -175,6 +182,7 @@ export default class CrearCliente extends Component {
             name="CP" 
             onChange={this.onChangeCp}
             value={this.state.cp}
+            required
             />
           </FormGroup>
         </Col>

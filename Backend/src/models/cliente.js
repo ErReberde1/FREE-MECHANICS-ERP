@@ -12,7 +12,8 @@ const clienteSchema = new Schema ({
     pais: String,
     cp: Number,
     plantilla: String,
-    impuesto: String,
+    impuesto: String
+    
 }, {
     timestamps: true
 })

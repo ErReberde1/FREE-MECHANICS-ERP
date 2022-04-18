@@ -24,7 +24,8 @@ app.use('/api/cliente', require('./routes/clientes')) // el enlace localhost:400
 app.use('/api/user', require('./routes/users'))
 app.use('/api/proveedor', require('./routes/proveedores'))
 app.use('/api/articulo', require('./routes/articulos')) 
-
+app.use('/api/factura', require('./routes/facturas')) 
+app.use('/api/presupuesto', require('./routes/presupuestos')) 
 
 // ejecución de la función conexión al servidor.
 main();

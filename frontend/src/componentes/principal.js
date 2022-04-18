@@ -1,11 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import Documentos from './documentos/documentos'
+
 
 export default class Principal extends Component {
+  imprimir = ()=>{
+    console.log("probando clases")
+  }
   render() {
     return (
       <div>
-        <h2>Página principal </h2>
+        <Documentos/>
+        
+        
       </div>
-    )
+    );
   }
 }

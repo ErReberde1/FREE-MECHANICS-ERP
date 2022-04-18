@@ -1,5 +1,15 @@
+
+.pag1{
+  position:absolute;
+}
+
+.pag2{
+  
+  position:absolute;
+}
 .App {
   text-align: center;
+  
 }
 
 .App-logo {

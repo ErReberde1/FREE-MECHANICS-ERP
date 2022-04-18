@@ -4,13 +4,17 @@ import axios from 'axios'
 import {Modal,ModalHeader,ModalBody, ModalFooter, Button, Form, Row, Col, FormGroup, Label, Input} from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+
 export default class ListaClientes extends Component {
    
     state = {
         clientes: [],
+        clientes2: [],
         crearcliente: false,
         showModal: false,
         clienteId: {},
+        clienteUpdateId2:{},
         busqueda: "",
         clienteUpdateId: {},
         showModalUpdate: false,
@@ -24,7 +28,7 @@ export default class ListaClientes extends Component {
         cp:""
         
     }
-    onChangeNombre = (e)=>{
+        onChangeNombre = (e)=>{
         this.setState({
         nombre : e.target.value})
       }
@@ -63,14 +67,34 @@ export default class ListaClientes extends Component {
     componenteDidMount = async () =>{
         const res = await axios.get('http://localhost:4000/api/cliente');   
         this.setState({ clientes: res.data })
+        this.setState({clientes2: res.data})
     }
     showModalUpdate = async (id) =>{
         const res = await axios.get('http://localhost:4000/api/cliente/' + id);
         this.setState({clienteUpdateId: res.data});
+        this.setState({clienteUpdateId2: res.data});
+        console.log(res.data);
+        this.setState({nombre : res.data.nombre,
+        apellido: res.data.apellido,
+        email: res.data.email,
+        direccion: res.data.direccion,
+        cif: res.data.cif,
+        ciudad: res.data.ciudad,
+        pais: res.data.pais,
+        cp:res.data.cp})
         this.setState({showModalUpdate: !this.state.showModalUpdate});
     }
     closeModalUpdate =()=>{
         this.setState({showModalUpdate: !this.state.showModalUpdate})
+        this.setState({nombre : "",
+        apellido: "",
+        email: "",
+        direccion: "",
+        cif: "",
+        ciudad: "",
+        pais: "",
+        cp:""
+        })
     }
     
 
@@ -85,22 +109,28 @@ export default class ListaClientes extends Component {
     }
     
 
-    filterElement = ()=>{
-        const search = this.state.clientes.filter(item =>{
+     filterElement (){
+
+       
+        const search =  this.state.clientes2.filter(item =>{
             
-            if(item.nombre.toString().toLowerCase().includes(this.state.busqueda)){
+            if(item.nombre.toLowerCase().includes(this.state.busqueda) || 
+            item.apellido.toLowerCase().includes(this.state.busqueda) || 
+            item.email.toString().toLowerCase().includes(this.state.busqueda) || 
+            item.cif.toString().toLowerCase().includes(this.state.busqueda))
                 return item;
-            };
-        }
-        )
+            
+        })
         this.setState({clientes: search})
         
     }
+    componentDidUpdate = async ()=>{
+        
+    }
 
-    searchElement =  (e)=>{
+    onChangeSearchElement = async(e)=>{
         e.persist()
-        this.setState({busqueda: e.target.value})
-        console.log(e.target.value);
+        await this.setState({busqueda: e.target.value})
         this.filterElement()
     }
 
@@ -109,8 +139,8 @@ export default class ListaClientes extends Component {
 
         this.componenteDidMount()
     }
-    updateCliente = async(e,id) =>{
-        e.preventDefault()
+    updateCliente = async(id) =>{
+        
         await axios.put('http://localhost:4000/api/cliente/' + id, {
             nombre : this.state.nombre,
             apellido: this.state.apellido,
@@ -120,10 +150,7 @@ export default class ListaClientes extends Component {
             ciudad: this.state.ciudad,
             pais: this.state.pais,
             cp: this.state.cp
-        })
-        
-    }
-
+        })}
   render() {
     return (
         <div className="row">
@@ -134,18 +161,17 @@ export default class ListaClientes extends Component {
             <div className="nav-item">
                 <button type="button" className="btn btn-secondary ms-2" onClick={this.componenteDidMount}>Consulta</button>
                 <button type="button" className="btn btn-secondary ms-2"><Link to="/crearcliente">Alta cliente</Link></button>
-                <input type="text" className="primary ms-2" onChange={this.searchElement}></input>
+                <input type="text" className="primary ms-2" onChange={this.onChangeSearchElement}></input>
             </div>
             <hr></hr>
             <div className="col-md-10 ms-5">
                 <table className="table">
                     <thead className="thead-dark">
-                        <tr >
-                            
+                        <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos</th>
                             <th scope="col">cif</th>
-                            <th scope="col">id</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Acciones</th>
                         </tr>   
                      </thead>
@@ -163,7 +189,7 @@ export default class ListaClientes extends Component {
                                         {cliente.cif}
                                     </td>
                                     <td>
-                                        {cliente._id}
+                                        {cliente.email}
                                     </td>
                                     <td>
                                         <Button 
@@ -218,7 +244,7 @@ export default class ListaClientes extends Component {
                                                 {this.state.clienteUpdateId.nombre} {this.state.clienteUpdateId.apellido}
                                             </ModalHeader>
                                             <ModalBody>
-                                            <Form className="formulario ms-4" onSubmit={this.updateCliente(this.state.clienteUpdateId._id)}>
+                                            <Form className="formulario ms-4" onSubmit={()=>this.updateCliente(this.state.clienteUpdateId._id)}>
                                                 <Row form>
                                                     <Col md={6}>
                                                     <FormGroup>
@@ -227,7 +253,7 @@ export default class ListaClientes extends Component {
                                                         name="Name"
                                                         placeholder="Nombre"
                                                         type="Name"
-                                                        value = {this.state.clienteUpdateId.nombre}
+                                                        value = {this.state.nombre}
                                                         />
                                                     </FormGroup>
                                                     </Col>
@@ -238,7 +264,8 @@ export default class ListaClientes extends Component {
                                                         name="Name"
                                                         placeholder="Apellido"
                                                         type="Name"
-                                                        value={this.state.clienteUpdateId.apellido}
+                                                        value={this.state.apellido}
+                                                        
                                                         />
                                                     </FormGroup>
                                                     </Col>
@@ -249,7 +276,7 @@ export default class ListaClientes extends Component {
                                                         name="email"
                                                         placeholder="ejemplo@ejemplo.es"
                                                         type="email"
-                                                        value={this.state.clienteUpdateId.email}
+                                                        value={this.state.email}
                                                         />
                                                     </FormGroup>
                                                     </Col>
@@ -261,7 +288,7 @@ export default class ListaClientes extends Component {
                                                     name="address" 
                                                     placeholder="Av..." 
                                                     onChange={this.onChangeDireccion}
-                                                    value={this.state.clienteUpdateId.direccion}
+                                                    value={this.state.direccion}
                                                     />
                                                 </FormGroup>
                                                 <FormGroup>
@@ -270,7 +297,7 @@ export default class ListaClientes extends Component {
                                                     name="CIF" 
                                                     placeholder="CIF" 
                                                     onChange={this.onChangeCif}
-                                                    value={this.state.clienteUpdateId.cif}
+                                                    value={this.state.cif}
                                                     />
                                                 </FormGroup>
                                                 
@@ -281,7 +308,7 @@ export default class ListaClientes extends Component {
                                                         <Input 
                                                         name="Ciudad" 
                                                         onChange={this.onChangeCiudad}
-                                                        value={this.state.clienteUpdateId.ciudad}
+                                                        value={this.state.ciudad}
                                                         />
                                                     </FormGroup>
                                                     </Col>
@@ -291,7 +318,7 @@ export default class ListaClientes extends Component {
                                                         <Input 
                                                         name="Pais"
                                                         onChange={this.onChangePais}
-                                                        value={this.state.clienteUpdateId.pais}
+                                                        value={this.state.pais}
                                                         />
                                                     </FormGroup>
                                                     </Col>
@@ -303,7 +330,7 @@ export default class ListaClientes extends Component {
                                                         type="number"
                                                         name="CP" 
                                                         onChange={this.onChangeCp}
-                                                        value={this.state.clienteUpdateId.cp}
+                                                        value={this.state.cp}
                                                         />
                                                     </FormGroup>
                                                     </Col>

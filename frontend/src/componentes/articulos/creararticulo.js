@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Form, Row, Col, FormGroup, Label, Input, Button } from "reactstrap";
+import { Link } from 'react-router-dom'
 
 export default class CrearArticulo extends Component {
 
@@ -65,6 +66,7 @@ export default class CrearArticulo extends Component {
   render() {
     return (
       <div>
+        <Button><Link to="/articulos">Consultar</Link></Button>
         <Form className="formulario ms-4" onSubmit={this.onSubmit}>
           <Row form>
             <Col md={6}>
